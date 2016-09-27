@@ -2,38 +2,100 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Spirited Away</title>
+    <link href="https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet">
     <link rel="stylesheet" href="style.css" media="screen" title="no title">
+
+    <!-- Required Aframe library and components -->
     <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.0.1"></script>
+    <script src="https://rawgit.com/aframevr/360-image-gallery-boilerplate/5e6ff42f7b78f1fe9fc98b2c3ad7e1b1dd797c54/components/set-image.js"></script>
+    <script src="https://rawgit.com/aframevr/360-image-gallery-boilerplate/888a4fbeb3e88e918f367e44b19e6ef011d5485e/components/update-raycaster.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-text-component/master/dist/aframe-text-component.min.js"></script>
+
+    <!-- Audio Libraries -->
     <script src="https://unpkg.com/webmidi@2.0.0-beta.1/webmidi.min.js"></script>
     <script src="https://cdn.rawgit.com/jshanley/blip/master/blip.js"></script>
     <script src="https://unpkg.com/web-audio-daw@2.3.1"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
   </head>
   <body>
-    <a-scene>
-      <a-assets>
-          <img id="texture" src="http://i.imgur.com/Ae2Q41H.png">
-          <img id="skybox" src="http://i.imgur.com/JbwCiV7.jpg">
-          <img id="grass" src="http://i.imgur.com/JbwCiV7.jpg">
-      </a-assets>
+    <h1 id="title">spirited away</h1>
+    <h3 id="subtitle">by dave barthly</h1>
+    <div>
+      <a-scene>
+        <a-assets>
+            <img id="texture" src="http://i.imgur.com/Ae2Q41H.png">
+            <img id="skybox" src="http://i.imgur.com/DarGU2M.jpg">
+            <audio id="click-sound" crossorigin="anonymous" src="music/mountain_wind_mixed.wav"></audio>
 
 
-      <a-box color="#FFFFFF" width="1" height="1" depth="1"
-             position="0 0 0"
-             rotation="45 45 45"
-             scale="1 2.5 1"
-             src="#texture">
-          <a-animation attribute="rotation" begin="click" repeat="indefinite" to="0 360 0"></a-animation>
+        <script id="link" type="text/nunjucks">
+            <a-entity text="text:take me away" position="-1.48 7.04 -5.76" rotation="58.44169510334397 0 0"
+            class="link" height="1" width="1"
+        </script>
 
-          <a-event name="mouseenter" scale="4 1 6"></a-event>
-      </a-box>
+        </a-assets>
 
-      <a-camera position="0 7 5">
+
+        <a-sound src="src: url(music/mountain_wind_mixed.wav)" autoplay="true" loop="true" position="0 2 5"></a-sound>
+
+        <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+          <a-entity template="src: #link" data-src="#skybox" data-thumb="#skybox"></a-entity>
+          <a-entity template="src: #link" data-src="#skybox2" data-thumb="#skybox2"></a-entity>
+        </a-entity>
+
+        <a-camera position="0 7 5">
           <a-cursor color="#fff">
-      </a-camera>
-      <a-sky src="#skybox"></a-sky>
-  </a-scene>
+        </a-camera>
+        <a-sky src="#skybox"></a-sky>
 
+<!--
+    <a-assets>
+     <img id="city" crossorigin="anonymous" src="http://i.imgur.com/JbwCiV7.jpg">
+     <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+     <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+     <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+     <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+     <img id="cubes" crossorigin="anonymous" src="http://i.imgur.com/DarGU2M.jpg">
+     <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+
+     <script id="link" type="text/nunjucks">
+       <a-plane class="link" height="1" width="1"
+         material="shader: flat; src: {{ thumb }}"
+         event-set__1="_event: mousedown; scale: 1 1 1"
+         event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+         event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+         event-set__4="_event: mouseleave; scale: 1 1 1"
+         set-image="on: click; target: #image-360; src: {{ src }}"
+         sound="on: click; src: #click-sound"
+         update-raycaster="#cursor"></a-plane>
+     </script>
+   </a-assets>
+
+   <a-sky id="image-360" radius="10" src="#city"></a-sky>
+
+   <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+     <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+     <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+     <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+   </a-entity>
+
+   <a-entity camera look-controls>
+     <a-cursor id="cursor"
+       animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+       animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+       event-set__1="_event: mouseenter; color: springgreen"
+       event-set__2="_event: mouseleave; color: black"
+       raycaster="objects: .link"></a-cursor>
+   </a-entity> -->
+    </a-scene>
+  <div>
   </body>
 </html>

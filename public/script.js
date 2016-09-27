@@ -1,3 +1,14 @@
+$(function() {
+
+  setTimeout(function(){
+
+    $( "#title" ).fadeOut( "slow", function() {});
+    $( "#subtitle" ).fadeOut( "slow", function() {});
+  }, 3000)
+
+});
+
+
 blip.sampleLoader()
     .samples({
     'smoothpad': 'https://rawgit.com/satiewaltz/project_4/320a703c0cc2aad5c877abd9e266945d4e09d30a/music/smoothintropiano.wav'
@@ -9,6 +20,8 @@ blip.sampleLoader()
 var velocity = 0
 
 function loaded () {
+  Wad.midiInstrument = new Wad({source : 'sine'});
+
   var TEMPO = 113;
   var smoothpad = blip.clip().sample('smoothpad');
   var padloop = blip.loop()
@@ -29,12 +42,12 @@ function loaded () {
 
       // Listening for a 'note on' message (on channel 1 only)
       input.addListener('noteon', "all",
-      function(e) {
-        switch (e.note.name) {
-          case "C":
-            padloop.start();
-            console.log(e);
-            break;
+        function(e) {
+          switch (e.note.name) {
+            case "C":
+              padloop.start();
+              console.log(e);
+              break;
         }
       });
 
