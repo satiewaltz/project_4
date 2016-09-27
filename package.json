@@ -2,8 +2,9 @@
   "name": "project_4",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/satiewaltz/project_4/issues"
   },
-  "homepage": "https://github.com/satiewaltz/project_4#readme"
+  "homepage": "https://github.com/satiewaltz/project_4#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodemon": "^1.10.2"
+  },
+  "engines": {
+    "node": "6.2.2"
+  }
 }

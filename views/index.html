@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title">
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/webmidi@2.0.0-beta.1/webmidi.min.js"></script>
+    <script src="https://cdn.rawgit.com/jshanley/blip/master/blip.js"></script>
+    <script src="https://unpkg.com/web-audio-daw@2.3.1"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+          <img id="texture" src="http://i.imgur.com/Ae2Q41H.png">
+          <img id="skybox" src="http://i.imgur.com/JbwCiV7.jpg">
+          <img id="grass" src="http://i.imgur.com/JbwCiV7.jpg">
+      </a-assets>
+
+
+      <a-box color="#FFFFFF" width="1" height="1" depth="1"
+             position="0 0 0"
+             rotation="45 45 45"
+             scale="1 2.5 1"
+             src="#texture">
+          <a-animation attribute="rotation" begin="click" repeat="indefinite" to="0 360 0"></a-animation>
+
+          <a-event name="mouseenter" scale="4 1 6"></a-event>
+      </a-box>
+
+      <a-camera position="0 7 5">
+          <a-cursor color="#fff">
+      </a-camera>
+      <a-sky src="#skybox"></a-sky>
+  </a-scene>
+
+  </body>
+</html>
